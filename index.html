@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Plan de Estudios · Psicología — Mejorado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent:#A31E1A; /* Auburn */
+      --accent-dark:#7A0F0F; /* Darker Auburn for gradient */
+      --gold:#FCD116; /* Gold */
+      --gold-dark:#C9A227; /* Satin Sheen Gold */
+      --green:#078930; /* Forest Green */
+      --gray-dark:#595959; /* Davy's Gray */
+      --gray-mid:#A5A5A5; /* Silver Dark */
+      --gray-light:#CCCCCC; /* Silver */
+      --muted:#666;
+      --bg:#f5f5f7;
+      --card:#ffffff;
+      --radius:12px;
+    }
+
+    * { box-sizing:border-box; }
+    body {
+      zoom:0.75; /* escala global al 80% */
+      margin:0;
+      font-family:'Red Hat Display', system-ui;
+      background:var(--bg);
+      color:#222;
+    }
+
+    header {
+      background:linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+      padding:18px 24px;
+      color:#fff;
+      box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    }
+    nav { display:flex; gap:16px; align-items:center; }
+    nav a { color:#fff; font-weight:600; text-decoration:none; opacity:0.9; }
+    nav a:hover { opacity:1; }
+
+    .container { max-width:1200px; margin:0 auto; padding:20px; }
+
+    .hero {
+      background:var(--card);
+      padding:20px 24px;
+      border-radius:var(--radius);
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
+      border:2px solid var(--gray-dark);
+    }
+    .hero h1{ margin:0 0 4px; }
+
+    .semestres { display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; margin-top:18px; }
+    .sem-btn {
+      padding:6px 8px;
+      background:#fff;
+      border-radius:var(--radius);
+      border:1px solid #ddd;
+      cursor:pointer;
+      transition:all 0.18s ease;
+      text-align:center;
+      box-shadow:0 2px 6px var(--gray-mid);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+    }
+    .sem-btn:hover { background:var(--accent-dark); color:#fff; border-color:var(--accent-dark); }
+    .sem-btn.active { background: var(--gray-dark); color:#fff; border-color: var(--gray-dark); box-shadow:0 4px 10px rgba(0,0,0,0.12); }
+
+    .layout { display:grid; grid-template-columns:320px 1fr; gap:20px; margin-top:20px; }
+
+    .card { background:var(--card); border-radius:var(--radius); padding:16px; box-shadow:0 4px 12px rgba(0,0,0,0.06); }
+
+    .grid-malla { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:14px; }
+
+    .malla-card { border:1px solid #eee; padding:12px; border-radius:var(--radius); cursor:pointer; transition:0.15s; background:#fafafa; }
+    .malla-card:hover { background:#f3f3f3; }
+
+    footer { margin-top:30px; background:#111; color:#ccc; padding:20px; }
+
+    @media(max-width:900px){ .layout { grid-template-columns:1fr; } .course-list { max-height:280px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav style="align-items:baseline;">
+        <span style="font-size:26px;font-weight:700;"><span style="font-size:48px; font-weight:900;">CUC</span> <span style="font-size:18px; font-weight:400;">UNIVERSIDAD DE LA COSTA</span></span>
+        <div style="flex:1"></div>
+        <a href="#programa">Psicología</a>
+        <a href="#malla">Malla</a>
+        <a href="#creditos">Créditos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+      <h1>Plan de Estudios H — Psicología</h1>
+    </section>
+
+    <section class="semestres" aria-label="Semestres">
+      <!-- botones generados por JS -->
+    </section>
+
+    <div class="layout">
+
+      <aside class="card" style="border-top:4px solid var(--accent);">
+        <h3 style="color:var(--accent); margin-bottom:8px; padding-bottom:4px;">Información del curso</h3>
+        <h2 id="curso-title">Selecciona un curso</h2>
+        <p id="curso-meta" style="color:#000; font-size:14px; line-height:1.5;"><strong>Código:</strong> —<br><strong>Créditos:</strong> —</p>
+        <p id="curso-desc" style="font-size:14px; color:#444; margin-top:8px;"><strong>Descripción:</strong><br>Selecciona una asignatura para ver la información detallada.</p>
+      </aside>
+
+      <section>
+        <div class="card" style="margin-bottom:16px;">
+          <h3>Malla curricular Psicología H</h3>
+          <div class="grid-malla" id="malla" aria-live="polite"></div>
+        </div>
+      </section>
+
+    </div>
+
+    <section style="margin-top:20px;">
+      <div class="card">
+        <h3 id="creditos">Derechos reservados · 2025</h3>
+        <p style="color:var(--muted)">Ejecutores del diseño:<br>• Álvaro Romero Pérez<br>• Carlos Rodríguez</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between;">
+      <span><span style="font-size:42px; font-weight:900;">CUC</span> <span style="font-size:18px; font-weight:400;">UNIVERSIDAD DE LA COSTA</span></span</span>
+      <span>© 2025</span>
+    </div>
+  </footer>
+
+  <script>
+    /* --------------------
+       DATA (mismo contenido)
+    -------------------- */
+    const cursos = [
+       // SEMESTRE 1
+      {curso:'HISTORIA DE LA PSICOLOGÍA', codigo:24160, creditos:4, tipo:'Obligatorio', nivel:1, descripcion:''},
+      {curso:'SENSOPERCEPCIÓN Y ATENCIÓN', codigo:24201, creditos:4, tipo:'Obligatorio', nivel:1, descripcion:''},
+      {curso:'ELECTIVA CIENCIAS BÁSICAS', codigo:24240, creditos:2, tipo:'Electivo', nivel:1, descripcion:''},
+      {curso:'TECNOLOGÍA DE LA INFORMACIÓN Y COMUNICACIÓN', codigo:24247, creditos:2, tipo:'Obligatorio', nivel:1, descripcion:''},
+      {curso:'INTRODUCCIÓN A LA VIDA UNIVERSITARIA', codigo:30006, creditos:1, tipo:'Obligatorio', nivel:1, descripcion:''},
+      {curso:'CONSTRUCCIÓN TEXTUAL', codigo:'300F3', creditos:2, tipo:'Obligatorio', nivel:1, descripcion:''},
+
+      // SEMESTRE 2
+      {curso:'FORTALECIMIENTO PERSONAL E INTERPERSONAL', codigo:24189, creditos:2, tipo:'Obligatorio', nivel:2, descripcion:''},
+      {curso:'PSICOBIOLOGÍA', codigo:24200, creditos:3, tipo:'Obligatorio', nivel:2, descripcion:''},
+      {curso:'EMOCIÓN Y MOTIVACIÓN', codigo:24207, creditos:4, tipo:'Obligatorio', nivel:2, descripcion:'Prerrequisito: SENSOPERCEPCIÓN Y ATENCIÓN (24201).'},
+      {curso:'FUNDAMENTO DE LA PSICOLOGÍA SOCIAL', codigo:24212, creditos:3, tipo:'Obligatorio', nivel:2, descripcion:''},
+      {curso:'INVESTIGACIÓN CUALITATIVA', codigo:24215, creditos:3, tipo:'Obligatorio', nivel:2, descripcion:''},
+
+      // SEMESTRE 3
+      {curso:'PSICOFISIOLOGÍA', codigo:24106, creditos:3, tipo:'Obligatorio', nivel:3, descripcion:'Prerrequisito: PSICOBIOLOGÍA (24200).'},
+      {curso:'TEORÍAS DE LA PERSONALIDAD', codigo:24109, creditos:3, tipo:'Obligatorio', nivel:3, descripcion:'Prerrequisito: HISTORIA DE LA PSICOLOGÍA (24160).'},
+      {curso:'MEMORIA Y APRENDIZAJE', codigo:24203, creditos:4, tipo:'Obligatorio', nivel:3, descripcion:'Prerrequisito: EMOCIÓN Y MOTIVACIÓN (24207).'},
+      {curso:'MODELO DE INVESTIGACIÓN CUANTITATIVA', codigo:24216, creditos:3, tipo:'Obligatorio', nivel:3, descripcion:''},
+      {curso:'ELECTIVA INTRODUCCIÓN A LA PSICOLOGÍA', codigo:24245, creditos:2, tipo:'Electivo', nivel:3, descripcion:''},
+
+      // SEMESTRE 4
+      {curso:'PSICOLOGÍA DE GRUPOS', codigo:24121, creditos:2, tipo:'Obligatorio', nivel:4, descripcion:'Prerrequisito: Ninguno.'},
+      {curso:'LENGUAJE, COGNICIÓN Y PENSAMIENTO', codigo:24204, creditos:4, tipo:'Obligatorio', nivel:4, descripcion:'Prerrequisito: MEMORIA Y APRENDIZAJE (24203).'},
+      {curso:'PSICOLOGÍA DE LA INFANCIA', codigo:24205, creditos:4, tipo:'Obligatorio', nivel:4, descripcion:'Prerrequisito: PSICOFISIOLOGÍA (24106).'},
+      {curso:'ESTADÍSTICA DESCRIPTIVA', codigo:24213, creditos:2, tipo:'Obligatorio', nivel:4, descripcion:'Prerrequisito: Ninguno.'},
+      {curso:'ENFOQUE CONDUCTUAL', codigo:24220, creditos:3, tipo:'Obligatorio', nivel:4, descripcion:'Prerrequisito: MEMORIA Y APRENDIZAJE (24203).'},
+
+      // SEMESTRE 5
+      {curso:'NEUROPSICOLOGÍA', codigo:24188, creditos:4, tipo:'Obligatorio', nivel:5, descripcion:'Prerrequisito: LENGUAJE, COGNICIÓN Y PENSAMIENTO (24204).'},
+      {curso:'ESTADÍSTICA INFERENCIAL', codigo:24214, creditos:3, tipo:'Obligatorio', nivel:5, descripcion:'Prerrequisito: ESTADÍSTICA DESCRIPTIVA (24213).'},
+      {curso:'ELECTIVA DISCIPLINAR', codigo:24225, creditos:2, tipo:'Electivo', nivel:5, descripcion:'Prerrequisito: ENFOQUE CONDUCTUAL (24220).'},
+      {curso:'ENFOQUE PSICOANALÍTICO', codigo:24221, creditos:3, tipo:'Obligatorio', nivel:5, descripcion:'Prerrequisito: ENFOQUE CONDUCTUAL (24220).'},
+      {curso:'PSICOLOGÍA SOCIAL', codigo:24226, creditos:3, tipo:'Obligatorio', nivel:5, descripcion:''},
+      
+      // SEMESTRE 6
+      {curso:'DILEMAS ÉTICOS', codigo:24187, creditos:2, tipo:'Obligatorio', nivel:6, descripcion:''},
+      {curso:'PSICOLOGÍA ADOLESCENCIA Y ADULTEZ', codigo:24206, creditos:4, tipo:'Obligatorio', nivel:6, descripcion:'Prerrequisito: PSICOLOGÍA DE LA INFANCIA (24205).'},
+      {curso:'PSICOPATOLOGÍA NIÑOS Y ADOLESCENTES', codigo:24209, creditos:3, tipo:'Obligatorio', nivel:6, descripcion:'Prerrequisito: PSICOLOGÍA DE LA INFANCIA (24205).'},
+      {curso:'FUNDAMENTOS DE MEDICIÓN Y EVALUACIÓN PSICOLÓGICA', codigo:24217, creditos:3, tipo:'Obligatorio', nivel:6, descripcion:''},
+      {curso:'ENFOQUE COGNITIVO', codigo:24239, creditos:3, tipo:'Obligatorio', nivel:6, descripcion:'Prerrequisito: ENFOQUE PSICOANALÍTICO (24221).'},
+      
+      // SEMESTRE 7
+      {curso:'LABORATORIO MEDICIÓN Y EVALUACIÓN PSICOLÓGICA', codigo:24218, creditos:3, tipo:'Obligatorio', nivel:7, descripcion:'Prerrequisito: FUNDAMENTOS DE MEDICIÓN Y EVALUACIÓN PSICOLÓGICA (24217).'},
+      {curso:'ENFOQUE HUMANISTA', codigo:24222, creditos:3, tipo:'Obligatorio', nivel:7, descripcion:'Prerrequisito: ENFOQUE COGNITIVO (24239).'},
+      {curso:'PSICOLOGÍA EDUCATIVA', codigo:24227, creditos:3, tipo:'Obligatorio', nivel:7, descripcion:''},
+      {curso:'PSICOLOGÍA ORGANIZACIONAL', codigo:24228, creditos:3, tipo:'Obligatorio', nivel:7, descripcion:''},
+      {curso:'ELECTIVA DE HUMANIDADES II', codigo:'300F2', creditos:2, tipo:'Electivo', nivel:7, descripcion:''},
+
+      // SEMESTRE 8
+      {curso:'PSICOPATOLOGÍA DE ADULTOS', codigo:24210, creditos:3, tipo:'Obligatorio', nivel:8, descripcion:'Prerrequisitos: PSICOLOGÍA ADOLESCENCIA Y ADULTEZ (24206), PSICOPATOLOGÍA NIÑOS Y ADOLESCENTES (24209), ENFOQUE HUMANISTA (24222).'},
+      {curso:'ELECTIVA MODELOS DE ANÁLISIS DE DATOS', codigo:24219, creditos:2, tipo:'Electivo', nivel:8, descripcion:'Prerrequisitos:ESTADÍSTICA DESCRIPTIVA (24213),ESTADÍSTICA INFERENCIAL(24214),INVESTIGACIÓN CUALITATIVA (24215),MODELO DE INVESTIGACIÓN CUANTITATIVA (24216).'},
+      {curso:'ELECTIVA DE ENFOQUE', codigo:24223, creditos:2, tipo:'Electivo', nivel:8, descripcion:''},
+      {curso:'PSICOLOGÍA CLÍNICA Y DE LA SALUD', codigo:24229, creditos:3, tipo:'Obligatorio', nivel:8, descripcion:'Prerrequisito: PSICOPATOLOGÍA NIÑOS Y ADOLESCENTES (24209).'},
+      {curso:'PSICOLOGÍA JURÍDICA', codigo:24230, creditos:3, tipo:'Obligatorio', nivel:8, descripcion:''},
+      {curso:'ELECTIVA DE PSICOLOGÍA APLICADA I', codigo:24246, creditos:2, tipo:'Electivo', nivel:8, descripcion:'Prerrequisito: PSICOLOGÍA SOCIAL (24226), PSICOLOGÍA EDUCATIVA (24227), PSICOLOGÍA ORGANIZACIONAL (24228).'},
+
+      // SEMESTRE 9
+      {curso:'DESARROLLO SOSTENIBLE', codigo:24185, creditos:2, tipo:'Obligatorio', nivel:9, descripcion:''},
+      {curso:'EMPRENDIMIENTO', codigo:24186, creditos:2, tipo:'Obligatorio', nivel:9, descripcion:''},
+      {curso:'ELECTIVA DE ACTUALIZACIÓN', codigo:24224, creditos:2, tipo:'Electivo', nivel:9, descripcion:'Prerrequisito: LABORATORIO MEDICIÓN Y EVALUACIÓN PSICOLÓGICA (24231).'},
+      {curso:'VIDA LABORAL', codigo:24231, creditos:3, tipo:'Obligatorio', nivel:9, descripcion:''},
+      {curso:'ELECTIVA DE PSICOLOGÍA APLICADA II', codigo:24241, creditos:2, tipo:'Electivo', nivel:9, descripcion:'Prerrequisito: PSICOPATOLOGÍA DE ADULTOS (24210), PSICOLOGÍA CLÍNICA Y DE LA SALUD (24229).'},
+      {curso:'ELECTIVA DE GRADO', codigo:24243, creditos:3, tipo:'Electivo', nivel:9, descripcion:''},
+
+      // SEMESTRE 10
+      {curso:'ELECTIVA LIBRE INTERDISCIPLINAR', codigo:24242, creditos:2, tipo:'Electivo', nivel:10, descripcion:''},
+      {curso:'PRÁCTICA PROFESIONAL', codigo:24244, creditos:12, tipo:'Práctica', nivel:10, descripcion:'Prerrequisitos: Cursar y Aprobar todas las asignaturas .'}
+    ];
+
+    /* --------------------
+       GENERACIÓN UI
+    -------------------- */
+
+    const semestresDiv = document.querySelector('.semestres');
+    for(let s=1; s<=10; s++){
+      const total = cursos.filter(c=>c.nivel===s).reduce((a,b)=>a+b.creditos,0);
+      const div = document.createElement('div');
+      div.className = 'sem-btn';
+      div.dataset.sem = s;
+      div.innerHTML = `<strong>SEMESTRE ${s}</strong><br><span style="font-size:13px;color:#666">Créditos: ${total}</span>`;
+      semestresDiv.appendChild(div);
+    }
+
+    const malla = document.getElementById('malla');
+    const title = document.getElementById('curso-title');
+    const meta = document.getElementById('curso-meta');
+    const desc = document.getElementById('curso-desc');
+
+    function renderMalla(sem){
+      malla.innerHTML = '';
+      cursos.filter(c => c.nivel === sem).forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'malla-card';
+        card.dataset.codigo = c.codigo;
+
+        // Detecta si tiene prerrequisito y aplicar color Satin Sheen Gold
+        const hasReq = c.descripcion && c.descripcion.toLowerCase().includes('prerrequisito');
+        if(hasReq){ card.style.border = '2px solid var(--gold-dark)'; card.style.background = '#F8E7B0'; }
+
+        card.innerHTML = `<strong>${c.curso}</strong><br><small style='color:#555'>Código ${c.codigo} · ${c.tipo}</small>`;
+        card.onclick = () => showCourse(c);
+        malla.appendChild(card);
+      });
+    }
+
+    function showCourse(c){
+      title.textContent = c.curso;
+      meta.innerHTML = `<div style='display:flex; justify-content:space-between; align-items:center; width:100%;'>
+  <span>Código: ${c.codigo}</span>
+  <span style='text-align:center; display:flex; flex-direction:column; line-height:1;'>
+    <span style='font-size:26px; font-weight:700; color:var(--accent-dark);'>${c.creditos}</span>
+    <span style='font-size:12px; color:#555; margin-top:2px;'>créditos</span>
+  </span>
+</div>`;
+      desc.innerHTML = c.descripcion ? c.descripcion.replace(/\n/g,'<br>') : 'Sin descripción.';
+    }
+
+    document.querySelectorAll('.sem-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.sem-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderMalla(parseInt(btn.dataset.sem));
+      });
+    });
+
+    // Render initial
+    renderMalla(1);
+    document.querySelector('.sem-btn[data-sem="1"]').classList.add('active');
+
+  </script>
+
+</body>
+</html>
