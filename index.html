@@ -10,439 +10,627 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 
   <style>
-    /* --- VARIABLES --- */
+    /* --- 1. VARIABLES GLOBALES (PALETA OFICIAL CUC + CICLOS) --- */
     :root {
-      --primary: #9e0b1c; 
-      --primary-dark: #7a0816;
-      --gold-border: #C9A227;
-      --bg: #f4f4f4;
-      --card: #ffffff;
-      --text: #333;
-      --radius: 12px;
+      --primary: #A3161A; 
+      --primary-dark: #7A0A0E; 
+      --warning: #FCD116; 
+      --accent-gold: #C9A227; 
+      
+      --bg-body: #f9f9f9; 
+      --bg-card: #ffffff;
+      
+      /* NEGRO ABSOLUTO PARA MAYOR RELEVANCIA V2.0 */
+      --text-main: #000000; 
+      --text-muted: #111111; 
+      --border-color: #CCCCCC; 
+      
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      
+      /* COLORES POR CICLO (4 - 4 - 2 para 10 niveles) */
+      --cat-basico: #607D8B; 
+      --cat-intermedio: #C9A227; 
+      --cat-profundo: #078930; 
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
+    /* --- ESTRUCTURA PANTALLA FIJA (PC) --- */
     body {
       font-family: 'Montserrat', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg-body);
+      color: var(--text-main);
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      margin: 0; 
+      padding: 0;
+      height: 100vh; 
+      overflow: hidden; 
     }
 
-    /* --- HEADER --- */
-    header {
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+
+    /* --- 2. BANDA SUPERIOR CON SELLO V2.0 --- */
+    .header {
       background-color: var(--primary);
       width: 100%;
-      padding: 1.5rem 0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      border-bottom: 4px solid var(--primary-dark);
+      height: 30px; 
+      border-bottom: 5px solid var(--primary-dark);
+      margin-bottom: 20px;
+      flex-shrink: 0; 
+      position: relative;
       display: flex;
-      justify-content: center;
       align-items: center;
-      margin-bottom: 2rem;
+      justify-content: flex-end;
+      padding-right: 25px;
+    }
+    
+    .version-badge {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 2px;
     }
 
-    .logo-container { display: flex; align-items: center; gap: 12px; color: white; padding: 0 20px; }
-    .cuc-siglas { font-weight: 900; font-size: 3.5rem; line-height: 1; letter-spacing: -2px; }
-    .cuc-texto { display: flex; flex-direction: column; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 12px; }
-    .cuc-texto span { font-weight: 300; font-size: 1.2rem; line-height: 1; text-transform: uppercase; letter-spacing: 1px; }
+    /* --- 3. CONTENEDOR PRINCIPAL FLUIDO --- */
+    .main-container { 
+      width: 90%; max-width: 1300px; margin: 0 auto; 
+      flex: 1; 
+      display: flex; flex-direction: column;
+      min-height: 0; 
+      position: relative; 
+      padding-bottom: 5px;
+    }
 
-    .container { width: 90%; max-width: 1200px; margin: 0 auto; flex-grow: 1; padding-bottom: 40px; }
+    .hero { 
+        text-align: center; 
+        margin-bottom: 20px; 
+        position: relative; 
+        display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero-title { color: var(--primary); text-transform: uppercase; font-weight: 900; font-size: 2.2rem; line-height: 1.1; }
+    .hero-subtitle { color: var(--text-main); font-weight: 800; margin-top: 5px; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase; }
 
-    .hero { text-align: center; margin-bottom: 30px; }
-    .hero h1 { color: var(--primary); text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
+    .btn-primary-top {
+        position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+        background-color: #fff; border: 2px solid var(--primary); color: var(--primary); 
+        padding: 8px 25px; border-radius: 50px; cursor: pointer; font-weight: 800; 
+        font-size: 0.85rem; text-transform: uppercase; text-decoration: none; transition: all 0.3s;
+    }
+    .btn-primary-top:hover { background-color: var(--primary); color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
 
-    /* --- SEMESTRES --- */
-    .semestres { 
+    /* --- LEYENDA SUPERIOR SUAVIZADA Y SIMÉTRICA V2.0 --- */
+    .leyenda-top { 
+        position: absolute; 
+        left: 0; 
+        top: 50%; 
+        transform: translateY(-50%); 
+        background: var(--bg-card); 
+        padding: 6px 18px; 
+        border-radius: 50px; 
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+        border: 1px solid var(--border-color); 
+        display: flex; 
+        flex-direction: row; 
+        gap: 18px; 
+        z-index: 90; 
+    }
+    .leyenda-item { display: flex; align-items: center; gap: 8px; font-size: 0.65rem; font-weight: 500; color: #000; text-transform: uppercase; letter-spacing: 0.5px;}
+    .leyenda-color { width: 12px; height: 12px; border-radius: 3px; }
+    .color-basico { background: var(--cat-basico); }
+    .color-prof { background: var(--cat-intermedio); }
+    .color-profun { background: var(--cat-profundo); }
+
+    /* --- 4. NAVEGACIÓN (BOTONES SLIM 5x2 PARA 10 NIVELES) --- */
+    .niveles-nav { 
       display: grid; 
       grid-template-columns: repeat(5, 1fr); 
-      gap: 12px; 
-      margin-bottom: 30px; 
+      gap: 10px; 
+      margin-bottom: 20px; 
     }
-
-    @media (max-width: 768px) {
-        .semestres { grid-template-columns: repeat(2, 1fr); }
-        .cuc-siglas { font-size: 2.5rem; }
-        .cuc-texto span { font-size: 1rem; }
+    .nivel-btn { 
+        padding: 10px 5px; 
+        background: var(--bg-card); 
+        border-radius: var(--radius-sm); 
+        border: 2px solid var(--border-color); 
+        cursor: pointer; transition: all 0.2s ease-out; text-align: center; 
+        display: flex; flex-direction: column; align-items: center; justify-content: center; 
+        min-height: 60px; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
+    /* SUAVIZADO: Sin negrita + Sombreado */
+    .nivel-btn-title { font-size: 0.95rem; margin-bottom: 2px; font-weight: 500; color: var(--text-main); text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.15); text-transform: uppercase;}
+    .nivel-btn-credits { font-size: 0.7rem; color: var(--text-main); font-weight: 400; }
 
-    .sem-btn {
-      padding: 15px 5px;
-      background: white;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 70px; 
-    }
-
-    .sem-btn strong { display: block; font-size: 0.95rem; margin-bottom: 4px; }
-    .sem-btn span { font-size: 0.75rem; color: #666; }
-
-    .sem-btn:hover { transform: translateY(-3px); border-color: var(--primary); color: var(--primary); }
-    .sem-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 10px rgba(158, 11, 28, 0.3); }
-    .sem-btn.active span { color: rgba(255,255,255,0.8); }
-
-    /* --- LAYOUT Y TARJETAS --- */
-    .layout { display: grid; grid-template-columns: 320px 1fr; gap: 25px; margin-bottom: 30px; }
-    .card { background: var(--card); border-radius: var(--radius); padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e1e1e1; }
-    aside.card { border-top: 5px solid var(--primary); height: fit-content; position: sticky; top: 20px; }
+    /* GLOW INTERNO V2.0 */
+    .cat-basico { border-left: 4px solid var(--cat-basico); }
+    .cat-basico.active { border: 2px solid var(--cat-basico); box-shadow: inset 0 0 25px rgba(96, 125, 139, 0.25); }
     
-    #curso-title { color: var(--primary); margin: 10px 0; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; line-height: 1.2; }
-
-    .grid-malla { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+    .cat-intermedio { border-left: 4px solid var(--cat-intermedio); }
+    .cat-intermedio.active { border: 2px solid var(--cat-intermedio); box-shadow: inset 0 0 25px rgba(201, 162, 39, 0.25); }
     
+    .cat-profundo { border-left: 4px solid var(--cat-profundo); }
+    .cat-profundo.active { border: 2px solid var(--cat-profundo); box-shadow: inset 0 0 25px rgba(7, 137, 48, 0.25); }
+
+    /* --- 5. DASHBOARD --- */
+    .dashboard-layout { 
+        display: grid; grid-template-columns: 280px 1fr; gap: 20px; 
+        flex: 1; min-height: 0; 
+    }
+    
+    .card { 
+        background: var(--bg-card); border-radius: var(--radius-md); padding: 20px; 
+        border: 1px solid var(--border-color); display: flex; flex-direction: column; min-height: 0; 
+    }
+    
+    .panel-lateral { border-top: 5px solid var(--primary); z-index: 50; position: relative;}
+    .panel-lateral-content { overflow-y: auto; flex: 1; padding-right: 5px; } 
+    
+    .panel-header { color: #000; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; border-bottom: 2px solid var(--border-color); display: inline-block; padding-bottom: 5px; }
+    .curso-titulo { color: var(--primary); margin: 5px 0; font-size: 1.2rem; font-weight: 900; text-transform: uppercase; line-height: 1.2; }
+    .curso-meta { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+    .curso-badge { background: var(--primary); color: white; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; }
+
+    /* MALLA SECCION V2.0 */
+    .malla-seccion { display: flex; flex-direction: column; overflow: hidden; position: relative; }
+    .grid-malla-container { flex: 1; overflow-y: auto; padding-right: 5px; z-index: 1; }
+    
+    /* 3 COLUMNAS ESTRICTAS Y MAYOR SEPARACIÓN */
+    .grid-malla { 
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 18px; 
+    }
+    
+    /* TARJETA ESTILO "CLEAN BOX" */
     .malla-card { 
-        border: 1px solid #eee; 
-        padding: 15px 10px; 
-        border-radius: var(--radius); 
+        background-color: #fcfcfc;
+        border: 1px solid #eaeaea; 
+        padding: 20px 15px; 
+        border-radius: var(--radius-md); 
         cursor: pointer; 
-        transition: all 0.2s ease; 
-        background: #fafafa; 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        min-height: 90px; 
-    }
-    .malla-card:hover { background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: var(--primary); transform: translateY(-2px); }
-
-    /* --- LISTA DE REQUISITOS --- */
-    .req-list { list-style: none; padding: 0; margin-top: 15px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; overflow: hidden; }
-    .req-list li { position: relative; padding: 10px 15px 10px 15px; font-size: 0.85rem; line-height: 1.4; color: #444; border-bottom: 1px solid #eee; display: flex; flex-direction: column; }
-    .req-list li:last-child { border-bottom: none; }
-    .req-name { font-weight: 600; color: #333; }
-    .req-semestre { color: var(--primary); font-size: 0.75rem; font-weight: 600; margin-top: 2px; text-transform: uppercase; }
-
-    /* Botón Regresar - CENTRADO PERFECTO */
-    .btn-back-container { 
-        margin-top: 2rem; 
+        transition: all 0.2s ease, border-color 0.2s, box-shadow 0.2s; 
         text-align: center; 
-        width: 100%; 
-        display: flex;
-        justify-content: center;
-    }
-    
-    .btn-back { 
-        background-color: transparent; 
-        border: 2px solid var(--primary); 
-        color: var(--primary); 
-        padding: 12px 40px; 
-        font-size: 1rem; 
-        border-radius: 50px; 
-        cursor: pointer; 
-        transition: all 0.3s ease; 
-        font-weight: bold; 
-        text-transform: uppercase; 
-        letter-spacing: 1px; 
-        text-decoration: none;
-        display: inline-block;
-    }
-    .btn-back:hover { background-color: var(--primary); color: white; box-shadow: 0 4px 10px rgba(158, 11, 28, 0.3); }
-
-    /* --- FOOTER ESTÉTICO Y COMPACTO --- */
-    footer { 
-        background-color: #000000; 
-        width: 100%; 
-        padding: 1.2rem 0; 
-        margin-top: 3rem; 
-        color: white; 
-        border-top: 2px solid #333; 
-    }
-    .footer-content { 
-        width: 90%; 
-        max-width: 1200px; 
-        margin: 0 auto; 
-        display: flex; 
-        align-items: center; 
-        justify-content: flex-start; 
-        gap: 12px; 
-    }
-
-    /* Icono Copyright */
-    .copyright-icon {
-        font-size: 1.8rem;
-        color: #888;
-        line-height: 1;
-    }
-
-    .dev-info { 
+        min-height: 110px; 
         display: flex; 
         flex-direction: column; 
-        line-height: 1.2; 
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
+        opacity: 0;
+        animation: popInCard 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; 
+    }
+    .malla-card.has-req { border-left: 4px solid var(--accent-gold); } 
+    .malla-card:hover { 
+        background-color: #ffffff;
+        border-color: var(--primary); 
+        transform: translateY(-4px) !important; 
+        box-shadow: 0 8px 25px rgba(163, 22, 26, 0.12); 
+        z-index: 2;
     }
     
-    /* Título reducido */
-    .dev-title { 
-        font-size: 0.65rem; 
-        font-weight: 700; 
-        letter-spacing: 0.5px; 
-        color: #999; 
-        margin-bottom: 4px;
+    /* TEXTO NEGRO, SIN NEGRITA GRUESA Y MAYÚSCULAS */
+    .malla-curso-nombre { 
+        color: #000000; 
+        font-size: 0.85rem; 
+        line-height: 1.3; 
+        font-weight: 500; 
         text-transform: uppercase;
     }
-    
-    /* Nombres en una sola línea */
-    .dev-name { 
-        font-size: 0.85rem; 
-        font-weight: 500; 
-        color: #fff;
-    }
-    
-    /* Año reducido */
-    .dev-year {
-        font-size: 0.65rem;
-        color: #666;
-        margin-top: 4px;
+
+    @keyframes popInCard { 
+        from { opacity: 0; transform: translateY(20px) scale(0.95); } 
+        to { opacity: 1; transform: translateY(0) scale(1); } 
     }
 
-    @media(max-width:900px){ .layout { grid-template-columns:1fr; } aside.card { position: static; } }
+    /* --- LISTA DE REQUISITOS --- */
+    .req-title { color: var(--primary); display: block; margin-bottom: 6px; text-transform: uppercase; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.5px; }
+    .req-list { list-style: none; padding: 0; background: var(--bg-body); border-radius: var(--radius-sm); border: 1px solid var(--border-color); }
+    .req-list li { padding: 8px 12px; font-size: 0.75rem; line-height: 1.3; border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; color: #000; font-weight: 600;}
+    .req-list li:last-child { border-bottom: none; }
+    .req-nivel { color: var(--primary); font-size: 0.65rem; font-weight: 800; margin-top: 3px; text-transform: uppercase;}
+    .req-empty { padding: 12px; background: var(--bg-body); border-radius: var(--radius-sm); color: #000; font-weight: 600; font-size: 0.75rem; border: 1px solid var(--border-color); }
+
+    /* --- 6. ANIMACIÓN V2.0: VENTANA FLOTANTE Y OVERLAY LOCAL --- */
+    .malla-overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+        z-index: 10; 
+        visibility: hidden; 
+        opacity: 0; 
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+        border-radius: var(--radius-md);
+    }
+    .malla-overlay.show { visibility: visible; opacity: 1; }
+
+    .rutas-floating-card {
+        position: absolute; top: 50%; left: 50%; 
+        transform: translate(-50%, -65%) scale(0.95); 
+        width: 90%; max-width: 650px; 
+        background: rgba(255, 255, 255, 0.98); 
+        border-radius: 16px; border: none;
+        box-shadow: 0 40px 80px -20px rgba(0,0,0, 0.4); 
+        z-index: 20; 
+        visibility: hidden; 
+        opacity: 0; 
+        max-height: 90%; overflow-y: auto; overflow-x: hidden;
+        padding: 30px; 
+        transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.6s ease;
+    }
+    .rutas-floating-card.show { 
+        visibility: visible; 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1); 
+    }
+
+    .rutas-title { color: var(--primary); font-size: 1.4rem; font-weight: 800; margin-bottom: 5px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+    .rutas-subtitle { text-align: center; color: #000; font-size: 0.9rem; font-weight: 700; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--accent-gold); }
+
+    .rutas-selector { display: flex; flex-direction: row; gap: 12px; margin-bottom: 10px; animation: fadeInNode 0.3s ease; }
+    
+    .ruta-btn { flex: 1; background: rgba(248, 250, 252, 0.8); border: 2px solid var(--border-color); padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 0.8rem; color: #000; transition: all 0.2s ease; text-align: center; text-transform: uppercase; line-height: 1.2; display: flex; align-items: center; justify-content: center; }
+    .ruta-btn:hover { border-color: var(--accent-gold); color: var(--primary); font-weight: 600; } 
+
+    .mapa-lista { display: none; padding-top: 10px; position: relative; }
+    .mapa-item { background: rgba(248, 250, 252, 0.9); border-left: 4px solid var(--accent-gold); padding: 12px 15px; margin-bottom: 8px; border-radius: 6px; font-size: 0.9rem; color: var(--primary); font-weight: 800; animation: fadeInNode 0.3s ease-out forwards; opacity: 0; }
+    @keyframes fadeInNode { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .btn-rutas-volver { display: none; margin: 20px auto 0; width: 45px; height: 45px; border-radius: 50%; background: transparent; border: 2px solid var(--primary); color: var(--primary); font-size: 1.4rem; cursor: pointer; align-items: center; justify-content: center; transition: all 0.2s ease; }
+    .btn-rutas-volver:hover { background: var(--primary); color: #fff; transform: scale(1.1); box-shadow: 0 4px 10px rgba(163, 22, 26, 0.3);}
+    .close-floating { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #000; transition: color 0.2s; line-height: 1; z-index: 10; }
+
+    /* --- 7. BANDA INFERIOR NEGRA --- */
+    .footer { 
+        background-color: #000000; 
+        width: 100%; 
+        height: 30px; 
+        border-top: 5px solid var(--primary-dark); 
+        margin-top: 15px; 
+        color: white; 
+        display: flex; 
+        align-items: center; 
+        flex-shrink: 0; 
+    }
+    
+    .footer-content { 
+        width: 90%; max-width: 1300px; margin: 0 auto; 
+        display: flex; align-items: center; justify-content: space-between;
+    }
+    .dev-info { display: flex; gap: 8px; align-items: center;}
+    .dev-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.8); text-transform: uppercase; }
+    .dev-name { font-size: 0.75rem; font-weight: 600; color: #fff; }
+    .dev-copyright { font-size: 0.7rem; font-weight: 500; color: rgba(255,255,255,0.7); }
+
+    /* --- MEDIA QUERIES --- */
+    @media (max-width: 1350px) {
+        .leyenda-top { 
+            position: relative; transform: none; top: auto; left: auto; flex-wrap: wrap; justify-content: center; 
+            border-radius: var(--radius-sm); border: 1px solid var(--border-color); 
+            margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); padding: 10px; 
+        }
+        .btn-primary-top { position: relative; top: auto; right: auto; transform: none; width: fit-content; margin-top: 5px; }
+    }
+    @media (max-width: 900px) { 
+        body { overflow-y: auto; height: auto; margin: 0; } 
+        .main-container { width: 95%; padding-bottom: 20px; }
+        .header { margin-bottom: 10px; }
+        .hero { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .hero-title { font-size: 1.6rem; }
+        .hero-subtitle { font-size: 0.95rem; }
+        
+        .leyenda-top { width: 100%; }
+
+        .niveles-nav { 
+            display: flex; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 15px; gap: 10px; 
+            scroll-behavior: smooth; -webkit-overflow-scrolling: touch; grid-template-columns: none; 
+        }
+        .niveles-nav::-webkit-scrollbar { display: none; }
+        .nivel-btn { min-width: 95px; flex-shrink: 0; }
+
+        .dashboard-layout { grid-template-columns: 1fr; flex: none; height: auto; gap: 15px; }
+        .card { overflow: visible; height: auto; padding: 15px; }
+        .panel-lateral { position: static; border-top: none; border-left: 5px solid var(--primary); }
+        .grid-malla-container { overflow-y: visible; }
+        
+        .grid-malla { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+        .malla-overlay { position: fixed; z-index: 100; border-radius: 0; }
+        .rutas-floating-card { position: fixed; width: 90%; left: 50%; top: 50%; transform: translate(-50%, -65%) scale(0.95); z-index: 110;}
+        .rutas-floating-card.show { transform: translate(-50%, -50%) scale(1) !important; }
+        
+        .rutas-selector { flex-direction: column; }
+        
+        .footer-content { flex-direction: column; justify-content: center; text-align: center; gap: 6px; }
+        .footer { height: auto; padding: 15px 0; margin-top: 20px;}
+    }
+    @media (max-width: 400px) {
+        .grid-malla { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo-container">
-        <div class="cuc-siglas">CUC</div>
-        <div class="cuc-texto">
-            <span class="linea-1">Universidad</span>
-            <span>de la Costa</span>
-        </div>
-    </div>
+  <header class="header">
+      <div class="version-badge">V2.0</div>
   </header>
 
-  <main class="container">
+  <main class="main-container">
     <section class="hero">
-      <h1>Plan de Estudios H — Psicología</h1>
-      <p style="color: #666; font-weight: 300;">Seleccione un semestre para ver las asignaturas</p>
+      
+      <div class="leyenda-top">
+          <div class="leyenda-item"><div class="leyenda-color color-basico"></div><span>Básico</span></div>
+          <div class="leyenda-item"><div class="leyenda-color color-prof"></div><span>Profesional</span></div>
+          <div class="leyenda-item"><div class="leyenda-color color-profun"></div><span>Profundización</span></div>
+      </div>
+
+      <h1 class="hero-title">Plan de Estudios H</h1>
+      <h2 class="hero-subtitle">Psicología</h2>
+      
+      <a href="https://fchys.github.io/menu-academico-cuc/" class="btn-primary-top">Regresar</a>
     </section>
 
-    <section class="semestres" aria-label="Semestres"></section>
+    <nav class="niveles-nav" id="niveles-container"></nav>
 
-    <div class="layout">
-      <aside class="card">
-        <h3 style="color:#666; font-size:0.8rem; text-transform:uppercase; margin-bottom:10px; letter-spacing:1px; border-bottom:2px solid var(--primary); display:inline-block; padding-bottom:5px;">Detalles de la Asignatura</h3>
-        
-        <h2 id="curso-title">Selecciona un curso</h2>
-        
-        <div id="curso-meta" style="margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
-            <p style="font-size: 0.9rem; color: #888; font-style: italic;">Haga clic en una materia de la malla para ver sus detalles aquí.</p>
+    <div class="dashboard-layout">
+      <aside class="card panel-lateral">
+        <h3 class="panel-header">Detalles de la Asignatura</h3>
+        <div class="panel-lateral-content">
+            <h2 id="curso-title" class="curso-titulo">Selecciona un curso</h2>
+            <div id="curso-meta" class="curso-meta">
+                <p style="color:#000; font-weight:700; font-size: 0.85rem;">Haz clic en una materia...</p>
+            </div>
+            <div id="curso-desc"></div>
         </div>
-        
-        <div id="curso-desc" style="font-size:0.9rem; color:#444; line-height: 1.6;"></div>
       </aside>
 
-      <section>
-        <div class="card" style="margin-bottom:16px;">
-          <h3 style="margin-bottom: 20px; color: var(--primary);">Asignaturas del Semestre</h3>
-          <div class="grid-malla" id="malla" aria-live="polite"></div>
+      <section class="card malla-seccion">
+        
+        <div class="malla-overlay" id="malla-overlay"></div>
+
+        <div class="rutas-floating-card" id="rutas-card">
+            <button class="close-floating" id="btn-close-card">&times;</button>
+            <h3 class="rutas-title" id="main-rutas-title">Rutas Electivas Gerenciales</h3>
+            <p class="rutas-subtitle" id="main-rutas-subtitle">Selecciona una ruta para desplegar su estructura temática.</p>
+            
+            <div class="rutas-selector" id="rutas-selector">
+                <div class="ruta-btn" onclick="profundizarRama('Investigación')">Investigación</div>
+                <div class="ruta-btn" onclick="profundizarRama('Ejecutiva')">Ejecutiva</div>
+                <div class="ruta-btn" onclick="profundizarRama('Emprendimiento')">Emprendimiento e Innovación</div>
+            </div>
+
+            <div class="mapa-lista" id="mapa-lista"></div>
+            <button class="btn-rutas-volver" id="btn-volver-rutas" onclick="restaurarRutas()" title="Volver">&#8592;</button>
+        </div>
+
+        <h3 style="margin-bottom:15px; font-size:1rem; text-transform:uppercase; color:var(--primary); font-weight: 800; border-bottom:2px solid var(--border-color); padding-bottom:5px; z-index:1; position:relative;">Malla del Nivel</h3>
+        
+        <div class="grid-malla-container">
+            <div class="grid-malla" id="malla-container"></div>
         </div>
       </section>
     </div>
-
-    <div class="btn-back-container">
-        <a href="https://fchys.github.io/menu-academico-cuc/" class="btn-back">VOLVER AL INICIO</a>
-    </div>
-
   </main>
 
-  <footer>
+  <footer class="footer">
     <div class="footer-content">
-        <div class="copyright-icon">©</div>
-        
         <div class="dev-info">
-            <span class="dev-title">DESARROLLO E IMPLEMENTACIÓN</span>
-            <span class="dev-name">Carlos Rodríguez | Álvaro Romero</span>
-            <span class="dev-year">2025 · Derechos Reservados</span>
+            <span class="dev-title">Desarrollo e implementación:</span>
+            <span class="dev-name">© Carlos Rodríguez</span>
         </div>
+        <div class="dev-copyright">2026 · Derechos Reservados CUC</div>
     </div>
   </footer>
 
   <script>
-    /* DATOS PENSUM H */
+    // DATOS DE LAS RUTAS GERENCIALES (Ocultas pero funcionales por si se requiere a futuro)
+    const datosRutas = {
+        "Investigación": ["Introducción a la Investigación", "Formulación de Proyectos", "Toma de decisiones basada en datos", "Laboratorios de escritura científica"],
+        "Ejecutiva": ["Liderazgo e inteligencia emocional", "Habilidades de negociación", "Gestión de personas", "Análisis de datos y toma de decisiones"],
+        "Emprendimiento": ["Ideas Lab", "Startup Lab", "Scale Lab", "Reinforce Lab"]
+    };
+
+    // BASE DE DATOS: PENSUM H - PSICOLOGÍA
     const cursos = [
-       // SEMESTRE 1
-      {curso:'HISTORIA DE LA PSICOLOGÍA', codigo:24160, creditos:4, tipo:'Obligatorio', nivel:1, descripcion:''},
-      {curso:'SENSOPERCEPCIÓN Y ATENCIÓN', codigo:24201, creditos:4, tipo:'Obligatorio', nivel:1, descripcion:''},
-      {curso:'ELECTIVA CIENCIAS BÁSICAS', codigo:24240, creditos:2, tipo:'Electivo', nivel:1, descripcion:''},
-      {curso:'TECNOLOGÍA DE LA INFORMACIÓN Y COMUNICACIÓN', codigo:24247, creditos:2, tipo:'Obligatorio', nivel:1, descripcion:''},
-      {curso:'INTRODUCCIÓN A LA VIDA UNIVERSITARIA', codigo:30006, creditos:1, tipo:'Obligatorio', nivel:1, descripcion:''},
-      {curso:'CONSTRUCCIÓN TEXTUAL', codigo:'300F3', creditos:2, tipo:'Obligatorio', nivel:1, descripcion:''},
+      // NIVEL 1
+      {curso:'HISTORIA DE LA PSICOLOGÍA', codigo:'24160', creditos:4, nivel:1, reqs:[]},
+      {curso:'SENSOPERCEPCIÓN Y ATENCIÓN', codigo:'24201', creditos:4, nivel:1, reqs:[]},
+      {curso:'ELECTIVA CIENCIAS BÁSICAS', codigo:'24240', creditos:2, nivel:1, reqs:[]},
+      {curso:'TECNOLOGÍA DE LA INF. Y COMUNICACIÓN', codigo:'24247', creditos:2, nivel:1, reqs:[]},
+      {curso:'INTRODUCCIÓN A LA VIDA UNIVERSITARIA', codigo:'30006', creditos:1, nivel:1, reqs:[]},
+      {curso:'CONSTRUCCIÓN TEXTUAL', codigo:'300F3', creditos:2, nivel:1, reqs:[]},
 
-      // SEMESTRE 2
-      {curso:'FORTALECIMIENTO PERSONAL E INTERPERSONAL', codigo:24189, creditos:2, tipo:'Obligatorio', nivel:2, descripcion:''},
-      {curso:'PSICOBIOLOGÍA', codigo:24200, creditos:3, tipo:'Obligatorio', nivel:2, descripcion:''},
-      {curso:'EMOCIÓN Y MOTIVACIÓN', codigo:24207, creditos:4, tipo:'Obligatorio', nivel:2, descripcion:'Prerrequisito: SENSOPERCEPCIÓN Y ATENCIÓN (24201).'},
-      {curso:'FUNDAMENTO DE LA PSICOLOGÍA SOCIAL', codigo:24212, creditos:3, tipo:'Obligatorio', nivel:2, descripcion:''},
-      {curso:'INVESTIGACIÓN CUALITATIVA', codigo:24215, creditos:3, tipo:'Obligatorio', nivel:2, descripcion:''},
+      // NIVEL 2
+      {curso:'FORTALECIMIENTO PERSONAL E INTERPERSONAL', codigo:'24189', creditos:2, nivel:2, reqs:[]},
+      {curso:'PSICOBIOLOGÍA', codigo:'24200', creditos:3, nivel:2, reqs:[]},
+      {curso:'EMOCIÓN Y MOTIVACIÓN', codigo:'24207', creditos:4, nivel:2, reqs:['24201']},
+      {curso:'FUNDAMENTO DE LA PSICOLOGÍA SOCIAL', codigo:'24212', creditos:3, nivel:2, reqs:[]},
+      {curso:'INVESTIGACIÓN CUALITATIVA', codigo:'24215', creditos:3, nivel:2, reqs:[]},
 
-      // SEMESTRE 3
-      {curso:'PSICOFISIOLOGÍA', codigo:24106, creditos:3, tipo:'Obligatorio', nivel:3, descripcion:'Prerrequisito: PSICOBIOLOGÍA (24200).'},
-      {curso:'TEORÍAS DE LA PERSONALIDAD', codigo:24109, creditos:3, tipo:'Obligatorio', nivel:3, descripcion:'Prerrequisito: HISTORIA DE LA PSICOLOGÍA (24160).'},
-      {curso:'MEMORIA Y APRENDIZAJE', codigo:24203, creditos:4, tipo:'Obligatorio', nivel:3, descripcion:'Prerrequisito: EMOCIÓN Y MOTIVACIÓN (24207).'},
-      {curso:'MODELO DE INVESTIGACIÓN CUANTITATIVA', codigo:24216, creditos:3, tipo:'Obligatorio', nivel:3, descripcion:''},
-      {curso:'ELECTIVA INTRODUCCIÓN A LA PSICOLOGÍA', codigo:24245, creditos:2, tipo:'Electivo', nivel:3, descripcion:''},
+      // NIVEL 3
+      {curso:'PSICOFISIOLOGÍA', codigo:'24106', creditos:3, nivel:3, reqs:['24200']},
+      {curso:'TEORÍAS DE LA PERSONALIDAD', codigo:'24109', creditos:3, nivel:3, reqs:['24160']},
+      {curso:'MEMORIA Y APRENDIZAJE', codigo:'24203', creditos:4, nivel:3, reqs:['24207']},
+      {curso:'MODELO DE INVESTIGACIÓN CUANTITATIVA', codigo:'24216', creditos:3, nivel:3, reqs:[]},
+      {curso:'ELECTIVA INTRODUCCIÓN A LA PSICOLOGÍA', codigo:'24245', creditos:2, nivel:3, reqs:[]},
 
-      // SEMESTRE 4
-      {curso:'PSICOLOGÍA DE GRUPOS', codigo:24121, creditos:2, tipo:'Obligatorio', nivel:4, descripcion:'Prerrequisito: Ninguno.'},
-      {curso:'LENGUAJE, COGNICIÓN Y PENSAMIENTO', codigo:24204, creditos:4, tipo:'Obligatorio', nivel:4, descripcion:'Prerrequisito: MEMORIA Y APRENDIZAJE (24203).'},
-      {curso:'PSICOLOGÍA DE LA INFANCIA', codigo:24205, creditos:4, tipo:'Obligatorio', nivel:4, descripcion:'Prerrequisito: PSICOFISIOLOGÍA (24106).'},
-      {curso:'ESTADÍSTICA DESCRIPTIVA', codigo:24213, creditos:2, tipo:'Obligatorio', nivel:4, descripcion:'Prerrequisito: Ninguno.'},
-      {curso:'ENFOQUE CONDUCTUAL', codigo:24220, creditos:3, tipo:'Obligatorio', nivel:4, descripcion:'Prerrequisito: MEMORIA Y APRENDIZAJE (24203).'},
+      // NIVEL 4
+      {curso:'PSICOLOGÍA DE GRUPOS', codigo:'24121', creditos:2, nivel:4, reqs:[]},
+      {curso:'LENGUAJE, COGNICIÓN Y PENSAMIENTO', codigo:'24204', creditos:4, nivel:4, reqs:['24203']},
+      {curso:'PSICOLOGÍA DE LA INFANCIA', codigo:'24205', creditos:4, nivel:4, reqs:['24106']},
+      {curso:'ESTADÍSTICA DESCRIPTIVA', codigo:'24213', creditos:2, nivel:4, reqs:[]},
+      {curso:'ENFOQUE CONDUCTUAL', codigo:'24220', creditos:3, nivel:4, reqs:['24203']},
 
-      // SEMESTRE 5
-      {curso:'NEUROPSICOLOGÍA', codigo:24188, creditos:4, tipo:'Obligatorio', nivel:5, descripcion:'Prerrequisito: LENGUAJE, COGNICIÓN Y PENSAMIENTO (24204).'},
-      {curso:'ESTADÍSTICA INFERENCIAL', codigo:24214, creditos:3, tipo:'Obligatorio', nivel:5, descripcion:'Prerrequisito: ESTADÍSTICA DESCRIPTIVA (24213).'},
-      {curso:'ELECTIVA DISCIPLINAR', codigo:24225, creditos:2, tipo:'Electivo', nivel:5, descripcion:'Prerrequisito: ENFOQUE CONDUCTUAL (24220).'},
-      {curso:'ENFOQUE PSICOANALÍTICO', codigo:24221, creditos:3, tipo:'Obligatorio', nivel:5, descripcion:'Prerrequisito: ENFOQUE CONDUCTUAL (24220).'},
-      {curso:'PSICOLOGÍA SOCIAL', codigo:24226, creditos:3, tipo:'Obligatorio', nivel:5, descripcion:''},
+      // NIVEL 5
+      {curso:'NEUROPSICOLOGÍA', codigo:'24188', creditos:4, nivel:5, reqs:['24204']},
+      {curso:'ESTADÍSTICA INFERENCIAL', codigo:'24214', creditos:3, nivel:5, reqs:['24213']},
+      {curso:'ELECTIVA DISCIPLINAR', codigo:'24225', creditos:2, nivel:5, reqs:['24220']},
+      {curso:'ENFOQUE PSICOANALÍTICO', codigo:'24221', creditos:3, nivel:5, reqs:['24220']},
+      {curso:'PSICOLOGÍA SOCIAL', codigo:'24226', creditos:3, nivel:5, reqs:[]},
       
-      // SEMESTRE 6
-      {curso:'DILEMAS ÉTICOS', codigo:24187, creditos:2, tipo:'Obligatorio', nivel:6, descripcion:''},
-      {curso:'PSICOLOGÍA ADOLESCENCIA Y ADULTEZ', codigo:24206, creditos:4, tipo:'Obligatorio', nivel:6, descripcion:'Prerrequisito: PSICOLOGÍA DE LA INFANCIA (24205).'},
-      {curso:'PSICOPATOLOGÍA NIÑOS Y ADOLESCENTES', codigo:24209, creditos:3, tipo:'Obligatorio', nivel:6, descripcion:'Prerrequisito: PSICOLOGÍA DE LA INFANCIA (24205).'},
-      {curso:'FUNDAMENTOS DE MEDICIÓN Y EVALUACIÓN PSICOLÓGICA', codigo:24217, creditos:3, tipo:'Obligatorio', nivel:6, descripcion:''},
-      {curso:'ENFOQUE COGNITIVO', codigo:24239, creditos:3, tipo:'Obligatorio', nivel:6, descripcion:'Prerrequisito: ENFOQUE PSICOANALÍTICO (24221).'},
+      // NIVEL 6
+      {curso:'DILEMAS ÉTICOS', codigo:'24187', creditos:2, nivel:6, reqs:[]},
+      {curso:'PSICOLOGÍA ADOLESCENCIA Y ADULTEZ', codigo:'24206', creditos:4, nivel:6, reqs:['24205']},
+      {curso:'PSICOPATOLOGÍA NIÑOS Y ADOLESCENTES', codigo:'24209', creditos:3, nivel:6, reqs:['24205']},
+      {curso:'FUNDAMENTOS DE MEDICIÓN Y EVALUACIÓN', codigo:'24217', creditos:3, nivel:6, reqs:[]},
+      {curso:'ENFOQUE COGNITIVO', codigo:'24239', creditos:3, nivel:6, reqs:['24221']},
       
-      // SEMESTRE 7
-      {curso:'LABORATORIO MEDICIÓN Y EVALUACIÓN PSICOLÓGICA', codigo:24218, creditos:3, tipo:'Obligatorio', nivel:7, descripcion:'Prerrequisito: FUNDAMENTOS DE MEDICIÓN Y EVALUACIÓN PSICOLÓGICA (24217).'},
-      {curso:'ENFOQUE HUMANISTA', codigo:24222, creditos:3, tipo:'Obligatorio', nivel:7, descripcion:'Prerrequisito: ENFOQUE COGNITIVO (24239).'},
-      {curso:'PSICOLOGÍA EDUCATIVA', codigo:24227, creditos:3, tipo:'Obligatorio', nivel:7, descripcion:''},
-      {curso:'PSICOLOGÍA ORGANIZACIONAL', codigo:24228, creditos:3, tipo:'Obligatorio', nivel:7, descripcion:''},
-      {curso:'ELECTIVA DE HUMANIDADES II', codigo:'300F2', creditos:2, tipo:'Electivo', nivel:7, descripcion:''},
+      // NIVEL 7
+      {curso:'LABORATORIO MEDICIÓN Y EVALUACIÓN', codigo:'24218', creditos:3, nivel:7, reqs:['24217']},
+      {curso:'ENFOQUE HUMANISTA', codigo:'24222', creditos:3, nivel:7, reqs:['24239']},
+      {curso:'PSICOLOGÍA EDUCATIVA', codigo:'24227', creditos:3, nivel:7, reqs:[]},
+      {curso:'PSICOLOGÍA ORGANIZACIONAL', codigo:'24228', creditos:3, nivel:7, reqs:[]},
+      {curso:'ELECTIVA DE HUMANIDADES II', codigo:'300F2', creditos:2, nivel:7, reqs:[]},
 
-      // SEMESTRE 8
-      {curso:'PSICOPATOLOGÍA DE ADULTOS', codigo:24210, creditos:3, tipo:'Obligatorio', nivel:8, descripcion:'Prerrequisitos: PSICOLOGÍA ADOLESCENCIA Y ADULTEZ (24206), PSICOPATOLOGÍA NIÑOS Y ADOLESCENTES (24209), ENFOQUE HUMANISTA (24222).'},
-      {curso:'ELECTIVA MODELOS DE ANÁLISIS DE DATOS', codigo:24219, creditos:2, tipo:'Electivo', nivel:8, descripcion:'Prerrequisitos:ESTADÍSTICA DESCRIPTIVA (24213),ESTADÍSTICA INFERENCIAL(24214),INVESTIGACIÓN CUALITATIVA (24215),MODELO DE INVESTIGACIÓN CUANTITATIVA (24216).'},
-      {curso:'ELECTIVA DE ENFOQUE', codigo:24223, creditos:2, tipo:'Electivo', nivel:8, descripcion:''},
-      {curso:'PSICOLOGÍA CLÍNICA Y DE LA SALUD', codigo:24229, creditos:3, tipo:'Obligatorio', nivel:8, descripcion:'Prerrequisito: PSICOPATOLOGÍA NIÑOS Y ADOLESCENTES (24209).'},
-      {curso:'PSICOLOGÍA JURÍDICA', codigo:24230, creditos:3, tipo:'Obligatorio', nivel:8, descripcion:''},
-      {curso:'ELECTIVA DE PSICOLOGÍA APLICADA I', codigo:24246, creditos:2, tipo:'Electivo', nivel:8, descripcion:'Prerrequisito: PSICOLOGÍA SOCIAL (24226), PSICOLOGÍA EDUCATIVA (24227), PSICOLOGÍA ORGANIZACIONAL (24228).'},
+      // NIVEL 8
+      {curso:'PSICOPATOLOGÍA DE ADULTOS', codigo:'24210', creditos:3, nivel:8, reqs:['24206','24209','24222']},
+      {curso:'ELECTIVA MODELOS DE ANÁLISIS DE DATOS', codigo:'24219', creditos:2, nivel:8, reqs:['24213','24214','24215','24216']},
+      {curso:'ELECTIVA DE ENFOQUE', codigo:'24223', creditos:2, nivel:8, reqs:[]},
+      {curso:'PSICOLOGÍA CLÍNICA Y DE LA SALUD', codigo:'24229', creditos:3, nivel:8, reqs:['24209']},
+      {curso:'PSICOLOGÍA JURÍDICA', codigo:'24230', creditos:3, nivel:8, reqs:[]},
+      {curso:'ELECTIVA DE PSICOLOGÍA APLICADA I', codigo:'24246', creditos:2, nivel:8, reqs:['24226','24227','24228']},
 
-      // SEMESTRE 9
-      {curso:'DESARROLLO SOSTENIBLE', codigo:24185, creditos:2, tipo:'Obligatorio', nivel:9, descripcion:''},
-      {curso:'EMPRENDIMIENTO', codigo:24186, creditos:2, tipo:'Obligatorio', nivel:9, descripcion:''},
-      {curso:'ELECTIVA DE ACTUALIZACIÓN', codigo:24224, creditos:2, tipo:'Electivo', nivel:9, descripcion:'Prerrequisito: LABORATORIO MEDICIÓN Y EVALUACIÓN PSICOLÓGICA (24231).'},
-      {curso:'VIDA LABORAL', codigo:24231, creditos:3, tipo:'Obligatorio', nivel:9, descripcion:''},
-      {curso:'ELECTIVA DE PSICOLOGÍA APLICADA II', codigo:24241, creditos:2, tipo:'Electivo', nivel:9, descripcion:'Prerrequisito: PSICOPATOLOGÍA DE ADULTOS (24210), PSICOLOGÍA CLÍNICA Y DE LA SALUD (24229).'},
-      {curso:'ELECTIVA DE GRADO', codigo:24243, creditos:3, tipo:'Electivo', nivel:9, descripcion:''},
+      // NIVEL 9
+      {curso:'DESARROLLO SOSTENIBLE', codigo:'24185', creditos:2, nivel:9, reqs:[]},
+      {curso:'EMPRENDIMIENTO', codigo:'24186', creditos:2, nivel:9, reqs:[]},
+      {curso:'ELECTIVA DE ACTUALIZACIÓN', codigo:'24224', creditos:2, nivel:9, reqs:['24218']},
+      {curso:'VIDA LABORAL', codigo:'24231', creditos:3, nivel:9, reqs:[]},
+      {curso:'ELECTIVA DE PSICOLOGÍA APLICADA II', codigo:'24241', creditos:2, nivel:9, reqs:['24210','24229']},
+      {curso:'ELECTIVA DE GRADO', codigo:'24243', creditos:3, nivel:9, reqs:[]},
 
-      // SEMESTRE 10
-      {curso:'ELECTIVA LIBRE INTERDISCIPLINAR', codigo:24242, creditos:2, tipo:'Electivo', nivel:10, descripcion:''},
-      {curso:'PRÁCTICA PROFESIONAL', codigo:24244, creditos:12, tipo:'Práctica', nivel:10, descripcion:'Prerrequisitos: Cursar y Aprobar todas las asignaturas .'}
+      // NIVEL 10
+      {curso:'ELECTIVA LIBRE INTERDISCIPLINAR', codigo:'24242', creditos:2, nivel:10, reqs:[]},
+      {curso:'PRÁCTICA PROFESIONAL', codigo:'24244', creditos:12, nivel:10, reqs:['ALL']}
     ];
 
-    /* GENERACIÓN UI */
-    const semestresDiv = document.querySelector('.semestres');
-    for(let s=1; s<=10; s++){
-      const total = cursos.filter(c=>c.nivel===s).reduce((a,b)=>a+b.creditos,0);
-      const div = document.createElement('div');
-      div.className = 'sem-btn';
-      div.dataset.sem = s;
-      div.innerHTML = `<strong>SEMESTRE ${s}</strong><span>${total} créditos</span>`;
-      semestresDiv.appendChild(div);
+    const UI = {
+        navContainer: document.getElementById('niveles-container'),
+        mallaContainer: document.getElementById('malla-container'),
+        title: document.getElementById('curso-title'),
+        meta: document.getElementById('curso-meta'),
+        desc: document.getElementById('curso-desc'),
+        rutasCard: document.getElementById('rutas-card'),
+        mallaOverlay: document.getElementById('malla-overlay'),
+        rutasSelector: document.getElementById('rutas-selector'),
+        mapaLista: document.getElementById('mapa-lista'),
+        btnVolver: document.getElementById('btn-volver-rutas'),
+        mainTitle: document.getElementById('main-rutas-title'),
+        mainSubtitle: document.getElementById('main-rutas-subtitle')
+    };
+
+    function init() {
+        generarNavegacion();
+        seleccionarNivel(1);
+        
+        document.getElementById('btn-close-card').onclick = () => {
+            UI.rutasCard.classList.remove('show');
+            UI.mallaOverlay.classList.remove('show');
+            setTimeout(restaurarRutas, 500); 
+        };
+        
+        UI.mallaOverlay.addEventListener('click', () => {
+            UI.rutasCard.classList.remove('show');
+            UI.mallaOverlay.classList.remove('show');
+            setTimeout(restaurarRutas, 500);
+        });
     }
 
-    const malla = document.getElementById('malla');
-    const title = document.getElementById('curso-title');
-    const meta = document.getElementById('curso-meta');
-    const desc = document.getElementById('curso-desc');
-
-    function renderMalla(sem){
-      malla.innerHTML = '';
-      cursos.filter(c => c.nivel === sem).forEach(c => {
-        const card = document.createElement('div');
-        card.className = 'malla-card';
-        card.dataset.codigo = c.codigo;
-        
-        // --- CORRECCIÓN DE "NINGUNO" ---
-        const descLower = c.descripcion ? c.descripcion.toLowerCase() : '';
-        // Solo es requisito si NO tiene la palabra "ninguno"
-        const hasReq = descLower.includes('prerrequisito') && !descLower.includes('ninguno');
-        
-        if(hasReq){ 
-            card.style.borderLeft = '4px solid var(--gold-border)'; 
-            card.style.background = '#fff'; 
+    function generarNavegacion() {
+        for(let n = 1; n <= 10; n++) {
+            const total = cursos.filter(c => c.nivel === n).reduce((acc, curr) => acc + curr.creditos, 0);
+            
+            let cat = '';
+            if (n <= 4) cat = 'cat-basico';            
+            else if (n <= 8) cat = 'cat-intermedio';   
+            else cat = 'cat-profundo';                 
+            
+            const btn = document.createElement('div');
+            btn.className = `nivel-btn ${cat}`;
+            btn.dataset.nivel = n;
+            btn.innerHTML = `<span class="nivel-btn-title">NIVEL ${n}</span><span class="nivel-btn-credits">${total} créditos</span>`;
+            btn.onclick = () => seleccionarNivel(n);
+            UI.navContainer.appendChild(btn);
         }
-        
-        card.innerHTML = `
-            <strong style="color:#222; text-shadow: 1px 1px 2px rgba(0,0,0,0.15); font-size:0.85rem; line-height:1.3;">${c.curso}</strong>
-            ${hasReq ? '<div style="margin-top:8px; font-size:0.7rem; color:#b58900; font-weight:600;">⚠️ Prerrequisito</div>' : ''}
-        `;
-        
-        card.onclick = () => showCourse(c);
-        malla.appendChild(card);
-      });
     }
 
-    // --- FUNCIÓN INTELIGENTE ---
-    function showCourse(c){
-      title.textContent = c.curso;
-      meta.innerHTML = `
-        <div style='display:flex; justify-content:space-between; align-items:center; width:100%;'>
-            <span style="font-weight:600; color:#555;">Código: ${c.codigo}</span>
-            <span style='background:var(--primary); color:white; padding:5px 10px; border-radius:50px; font-size:0.8rem; font-weight:bold;'>
-                ${c.creditos} Créditos
-            </span>
-        </div>`;
-
-      // Normalizamos la descripción
-      const descLower = c.descripcion ? c.descripcion.toLowerCase() : '';
-
-      // --- CORRECCIÓN DE "NINGUNO" EN EL PANEL LATERAL ---
-      if (descLower.includes('prerrequisito') && !descLower.includes('ninguno')) {
-          let rawText = c.descripcion.replace(/Prerrequisito(s)?:/i, '').trim();
-          
-          // --- PROTECCIÓN DE NOMBRES CON COMAS ---
-          rawText = rawText.replace("LENGUAJE, COGNICIÓN Y PENSAMIENTO", "TEMP_LENGUAJE");
-          
-          let reqArray = rawText.split(',');
-
-          let listHtml = '<ul class="req-list">';
-          reqArray.forEach(reqName => {
-              let cleanName = reqName.trim();
-              
-              // Restauramos nombres
-              if(cleanName.includes("TEMP_LENGUAJE")){
-                  cleanName = cleanName.replace("TEMP_LENGUAJE", "LENGUAJE, COGNICIÓN Y PENSAMIENTO");
-              }
-
-              let nameForSearch = cleanName.split('(')[0].trim();
-              
-              let found = cursos.find(x => x.curso === nameForSearch);
-              let semLabel = found ? `(Semestre ${found.nivel})` : '';
-
-              listHtml += `<li><span class="req-name">${nameForSearch}</span> <span class="req-semestre">${semLabel}</span></li>`;
-          });
-          listHtml += '</ul>';
-
-          desc.innerHTML = `<strong style="color:var(--primary); display:block; margin-bottom:5px; text-transform:uppercase; font-size:0.8rem;">Requisitos para cursar:</strong>${listHtml}`;
-      } else {
-          // Mensaje limpio si es "Ninguno" o vacío
-          desc.innerHTML = '<div style="padding:15px; background:#f9f9f9; border-radius:8px; color:#666; font-size:0.85rem;">✅ Esta asignatura no tiene prerrequisitos registrados.</div>';
-      }
+    function seleccionarNivel(n) {
+        document.querySelectorAll('.nivel-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector(`.nivel-btn[data-nivel="${n}"]`).classList.add('active');
+        UI.mallaContainer.innerHTML = '';
+        
+        cursos.filter(c => c.nivel === n).forEach((c, index) => {
+            const card = document.createElement('div');
+            card.className = `malla-card ${c.reqs.length > 0 ? 'has-req' : ''}`;
+            card.style.animationDelay = `${index * 0.08}s`; 
+            
+            card.innerHTML = `<span class="malla-curso-nombre">${c.curso}</span>${c.reqs.length > 0 ? '<div style="margin-top:8px; font-size:0.65rem; color:var(--accent-gold); font-weight:900;">⚠️ Requisito</div>' : ''}`;
+            
+            card.onclick = () => {
+                UI.title.textContent = c.curso;
+                UI.meta.innerHTML = `<span style="font-weight:800; color:#000; font-size:0.85rem;">COD: ${c.codigo}</span><span class="curso-badge">${c.creditos} CR</span>`;
+                
+                if(c.curso.includes("GERENCIAL")) {
+                    restaurarRutas();
+                    UI.rutasCard.classList.add('show');
+                    UI.mallaOverlay.classList.add('show');
+                } else {
+                    UI.rutasCard.classList.remove('show');
+                    UI.mallaOverlay.classList.remove('show');
+                }
+                
+                if(c.reqs.length === 0) {
+                    UI.desc.innerHTML = '<div class="req-empty">✅ Sin prerrequisitos.</div>';
+                }
+                else if(c.reqs[0] === 'ALL') {
+                    UI.desc.innerHTML = '<div class="req-empty" style="border-left: 4px solid var(--primary);">🔒 <strong style="color:var(--primary);">Requisito General:</strong><br>Cursar y Aprobar todas las asignaturas previas.</div>';
+                }
+                else {
+                    let h = '<span class="req-title">Requisitos para cursar:</span><ul class="req-list">';
+                    c.reqs.forEach(r => {
+                        const d = cursos.find(x => x.codigo === r);
+                        if(d) h += `<li><span style="font-weight:800;">${d.curso}</span><span class="req-nivel">(Nivel ${d.nivel})</span></li>`;
+                    });
+                    UI.desc.innerHTML = h + '</ul>';
+                }
+            };
+            UI.mallaContainer.appendChild(card);
+        });
     }
 
-    document.querySelectorAll('.sem-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.sem-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderMalla(parseInt(btn.dataset.sem));
-      });
-    });
+    function profundizarRama(ruta) {
+        UI.rutasSelector.style.display = 'none';
+        UI.mainSubtitle.style.display = 'none';
+        
+        const tituloRuta = ruta === 'Emprendimiento' ? 'Emprendimiento e Innovación' : ruta;
+        UI.mainTitle.innerHTML = `<span style="color:#000; font-size:0.9rem; display:block; margin-bottom:5px;">Ruta Seleccionada:</span> ${tituloRuta}`;
+        
+        UI.mapaLista.style.display = 'block';
+        UI.btnVolver.style.display = 'flex';
+        
+        const key = ruta.startsWith('Emprendimiento') ? 'Emprendimiento' : ruta;
+        const temas = datosRutas[key];
+        UI.mapaLista.innerHTML = '';
+        temas.forEach((t, index) => {
+            const item = document.createElement('div');
+            item.className = 'mapa-item';
+            item.style.animationDelay = `${index * 0.08}s`; 
+            item.textContent = t;
+            UI.mapaLista.appendChild(item);
+        });
+    }
 
-    renderMalla(1);
-    document.querySelector('.sem-btn[data-sem="1"]').classList.add('active');
+    function restaurarRutas() {
+        UI.rutasSelector.style.display = 'flex';
+        UI.mainSubtitle.style.display = 'block';
+        UI.mapaLista.style.display = 'none';
+        UI.btnVolver.style.display = 'none';
+        UI.mainTitle.textContent = 'Rutas Electivas Gerenciales';
+        UI.mapaLista.innerHTML = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
 </html>
